@@ -1,0 +1,42 @@
+@model ProductListViewModel
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoriesMenu")
+        @await Component.InvokeAsync("ProductFilterMenu")
+        <div products="" number="3"></div>
+    </div>
+    <div class="col-md-9">
+
+        <div class="row my-3 ">
+
+            @foreach (Product prd in Model.Products)
+            {
+                @* <div>
+            <h3> @prd.ProductName </h3>
+            <p> @prd.Price </p>
+            <p>
+            <a href="/Product/Get/@prd.ProductId"> Get Details </a>
+            </p>
+
+            </div> *@
+                <partial name="_ProductCard" model="@prd"> </partial>
+
+            }
+        </div>
+
+        <div>
+            <div page-model="@Model?.Pagination" page-action="Index" class="btn-group" page-classes-enabled="true"
+                page-class="btn" page-class-normal="btn-outline-dark" page-class-selected="btn-primary"></div>
+
+
+        </div>
+
+
+
+    </div>
+</div>
+
+@section Footer {
+
+}

@@ -1,0 +1,71 @@
+@page "/card"
+@model CardModel
+
+@* Card (@Model.Card.Lines.Count()) *@
+<div>
+    <div class="display-6 text-center ">Card
+
+
+
+    </div>
+    <table>
+
+        <thead>
+            <TR>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+
+            </TR>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Card?.Lines ?? Enumerable.Empty<CardLine>())
+            {
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.Price.ToString("c") </td>
+                    <td>@((item.Product.Price * item.Quantity).ToString("c2"))</td>
+                    <td>
+                        <form method="post" asp-page-handler="Remove">
+                            <input type="hidden" name="id" value="@item.Product.ProductId" />
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa fa-remove"></i>
+                                Remove
+                            </button>
+
+                        </form>
+
+                    </td>
+
+
+                </tr>
+
+            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right"> Total:</td>
+                <td class="text-right text-danger">
+                    @Model.Card?.ComputeToTotalValue().ToString("c2")
+
+
+                </td>
+            </tr>
+
+        </tfoot>
+    </table>
+    <div class="text-center my-3">
+        <div class="btn-group">
+
+            <a class="btn btn-primary" href="@Model?.ReturnUrl"> Continue Shopping </a>
+            <a class="btn btn-primary mx-2" asp-action="Checkout" asp-controller="Order" >Checkout</a>
+        </div>
+
+
+    </div>
+</div>

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 arka kapak yazısı yazıldı.
+=======
+Ben arkakapağım. Güzel şeyleri söylerim.
+>>>>>>> arkakapak
